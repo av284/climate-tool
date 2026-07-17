@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climate Risk Stress-Testing Tool</title>
     
-    <!-- Load React and Recharts charting libraries directly from the web -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
-    <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
+    <!-- Load React 18 -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    
+    <!-- Load Modern Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Load Prop-Types & Recharts Dependencies -->
+    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+    <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
 
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f7fafc; margin: 0; padding: 40px; color: #2d3748; }
@@ -38,7 +42,8 @@
 
     <div id="root"></div>
 
-    <script type="text/babel">
+    <!-- Added data-presets config to guarantee React transpiling -->
+    <script type="text/babel" data-presets="react,env">
         const { useState } = React;
         const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = Recharts;
 
@@ -77,15 +82,15 @@
             });
 
             return (
-                <div class="container">
-                    <div class="header">
-                        <span class="badge">Sustainable Finance Lab</span>
-                        <h1 class="title">Climate Risk & Stress-Testing Tool</h1>
-                        <p class="desc">Simulating transition risk: Drag the slider to apply a carbon tax and observe how emissions profiles alter real corporate valuations.</p>
+                <div className="container">
+                    <div className="header">
+                        <span className="badge">Sustainable Finance Lab</span>
+                        <h1 className="title">Climate Risk & Stress-Testing Tool</h1>
+                        <p className="desc">Simulating transition risk: Drag the slider to apply a carbon tax and observe how emissions profiles alter real corporate valuations.</p>
                     </div>
 
-                    <div class="slider-card">
-                        <div class="slider-header">
+                    <div className="slider-card">
+                        <div className="slider-header">
                             <span>Regulatory Carbon Tax Impact:</span>
                             <span style={{ color: '#0070f3', fontSize: '22px' }}>${carbonPrice} / tonne</span>
                         </div>
@@ -93,9 +98,9 @@
                             type="range" min="0" max="200" step="10" 
                             value={carbonPrice} 
                             onChange={(e) => setCarbonPrice(Number(e.target.value))} 
-                            class="slider"
+                            className="slider"
                         />
-                        <div class="slider-labels">
+                        <div className="slider-labels">
                             <span>$0 (Baseline)</span>
                             <span>$50 (Global Floor)</span>
                             <span>$100 (Tightening)</span>
@@ -104,18 +109,18 @@
                         </div>
                     </div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <span class="stat-label">Weighted Portfolio Profit Margin Drop</span>
-                            <div class="stat-value-bad">-{calculatePortfolioImpact()}%</div>
+                    <div className="stats-grid">
+                        <div className="stat-card">
+                            <span className="stat-label">Weighted Portfolio Profit Margin Drop</span>
+                            <div className="stat-value-bad">-{calculatePortfolioImpact()}%</div>
                         </div>
-                        <div class="stat-card">
-                            <span class="stat-label">Highest Transition Risk Concentrations</span>
-                            <div class="stat-value-neutral">Suncor (SU) & Air Canada (AC)</div>
+                        <div className="stat-card">
+                            <span className="stat-label">Highest Transition Risk Concentrations</span>
+                            <div className="stat-value-neutral">Suncor (SU) & Air Canada (AC)</div>
                         </div>
                     </div>
 
-                    <div class="chart-container">
+                    <div className="chart-container">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={chartData}>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -129,9 +134,9 @@
                         </ResponsiveContainer>
                     </div>
 
-                    <div class="lesson-card">
-                        <h4 class="lesson-title">Sustainable Finance Integration Concept:</h4>
-                        <p class="lesson-text">
+                    <div className="lesson-card">
+                        <h4 className="lesson-title">Sustainable Finance Integration Concept:</h4>
+                        <p className="lesson-text">
                             Notice how <strong>Microsoft (MSFT)</strong>'s earnings bars remain practically identical even under a severe $200/tonne regulatory shock due to high asset efficiency. Conversely, asset-heavy carbon-exposed holdings like <strong>Suncor (SU)</strong> suffer immediate, systemic margin erosion. This directly proves why quantitative ESG integration is used to protect asset value and reallocate capital away from transition liabilities.
                         </p>
                     </div>
